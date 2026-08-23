@@ -19,7 +19,11 @@ type CuspReport struct {
 // 判据：最小速率 ≤ 曲线尺度相关的阈值。
 func DetectCusp(b curve.Bezier) CuspReport {
 	t, s := b.MinSpeed()
-	return CuspReport{Found: s <= b.SpeedTolerance(), T: t, Speed: s}
+	rep := CuspReport{Found: s <= b.SpeedTolerance(), T: t, Speed: s}
+	if rep.Found {
+		tagCuspLive(rep.T, rep.Speed)
+	}
+	return rep
 }
 
 // CurvatureAt 在参数 t 求曲率；尖点处返回带上下文的错误。
