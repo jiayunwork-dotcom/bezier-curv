@@ -33,6 +33,7 @@ func cmdCurvature(args []string, env Env) int {
 	for _, t := range ts {
 		k, err := model.CurvatureAt(b, t)
 		if err != nil {
+			model.BindCuspCurve(t)
 			anyErr = true
 			if signed {
 				tb.add(fmtNum(t, 4), "err", "err")
