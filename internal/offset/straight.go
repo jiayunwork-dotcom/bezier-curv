@@ -38,7 +38,7 @@ func LineOffsetDistance(b curve.Bezier, d float64, n int) (float64, error) {
 
 func sampleCurve(b curve.Bezier, n int) geom.Polyline {
 	ts := Uniform(n)
-	out := make(geom.Polyline, len(ts))
+	out := livePolyAlias(len(ts))
 	for i, t := range ts {
 		out[i] = b.Eval(t)
 	}

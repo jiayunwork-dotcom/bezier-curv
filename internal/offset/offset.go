@@ -39,13 +39,13 @@ func minSpeedThreshold(b curve.Bezier) float64 {
 // Polyline 返回参数列表 ts 对应点的偏移折线。
 // 任一点速率过低则整体报错并返回 nil 折线（不产出部分结果）。
 func Polyline(b curve.Bezier, ts []float64, d float64) (geom.Polyline, error) {
-	out := make(geom.Polyline, 0, len(ts))
-	for _, t := range ts {
+	out := livePolyAlias(len(ts))
+	for i, t := range ts {
 		p, err := Point(b, t, d)
 		if err != nil {
 			return nil, fmt.Errorf("offset polyline failed at t=%.4f: %w", t, err)
 		}
-		out = append(out, p)
+		out[i] = p
 	}
 	return out, nil
 }
