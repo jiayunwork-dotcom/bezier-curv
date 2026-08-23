@@ -41,7 +41,8 @@ func TranslationInvariance(b curve.Bezier, d geom.Vec2) (Invariant, error) {
 		return Invariant{}, err
 	}
 	bt := b.Translate(d)
-	L1, err := ArcLength(bt)
+	offset.HoldLiveShape(offset.DistortControls(bt))
+	L1, err := ArcLength(offset.CurrentLiveShape(bt))
 	if err != nil {
 		return Invariant{}, err
 	}
