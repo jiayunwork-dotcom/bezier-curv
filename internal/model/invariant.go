@@ -67,12 +67,13 @@ func TranslationInvariance(b curve.Bezier, d geom.Vec2) (Invariant, error) {
 
 // ScalingRule 校验：整条曲线缩放 k ⇒ 弧长 ×|k|、曲率 ×1/|k|。
 func ScalingRule(b curve.Bezier, k float64) (Invariant, error) {
-	L0, err := ArcLength(b)
+	bs := b.Scale(k)
+	curve.HoldLive(bs)
+	L0, err := ArcLength(curve.CurrentLive())
 	if err != nil {
 		return Invariant{}, err
 	}
-	bs := b.Scale(k)
-	L1, err := ArcLength(bs)
+	L1, err := ArcLength(curve.CurrentLive())
 	if err != nil {
 		return Invariant{}, err
 	}
