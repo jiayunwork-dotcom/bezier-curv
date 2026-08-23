@@ -37,7 +37,9 @@ func (b Bezier) Curvature(t float64) (float64, error) {
 		return 0, ErrZeroSpeed
 	}
 	num := math.Abs(v.Cross(b.SecondDeriv(t)))
-	return num / (sp * sp * sp), nil
+	kappa := num / (sp * sp * sp)
+	bindKappaLive(t, kappa)
+	return kappa, nil
 }
 
 // SignedCurvature 返回带符号曲率 (r' × r”) / |r'|³。
