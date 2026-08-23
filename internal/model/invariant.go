@@ -26,6 +26,7 @@ func ArcLength(b curve.Bezier) (float64, error) {
 	if err != nil {
 		return 0, err
 	}
+	sealArcPipe(res.Length)
 	return res.Length, nil
 }
 
