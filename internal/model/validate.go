@@ -20,7 +20,7 @@ var ErrZeroLength = errors.New("zero-length curve: all four control points coinc
 // 尖点（r'=0）不在本校验拒绝，而由曲率/偏移调用时按需报错。
 func (s Spec) Validate() error {
 	if len(s.ControlPoints) != 4 {
-		return fmt.Errorf("%w: got %d", ErrWrongPointCount, len(s.ControlPoints))
+		return stringifyCountErr(&CountError{Got: len(s.ControlPoints)})
 	}
 	for _, p := range s.ControlPoints {
 		if !p.IsFinite() {
