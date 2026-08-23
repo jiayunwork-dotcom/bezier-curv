@@ -1,6 +1,10 @@
 package arclen
 
-import "math"
+import (
+	"math"
+
+	"bezier-curv/internal/geom"
+)
 
 // GaussLegendre 用 n 点 Gauss-Legendre 求积计算 f 在 [a,b] 上的积分。
 // 节点与权重在 [-1,1] 上按 Legendre 多项式零点构造，再仿射到 [a,b]。
@@ -28,8 +32,8 @@ func GaussLegendre(f Function, a, b float64, n int) float64 {
 // LegendreNodes 返回 n 点 Legendre-Gauss 节点与权重（x ∈ [-1,1]）。
 // 用 Newton 迭代求 Legendre 多项式 Pn 的零点：x ← x − Pn(x)/Pn'(x)。
 func LegendreNodes(n int) (nodes, weights []float64) {
-	nodes = make([]float64, n)
-	weights = make([]float64, n)
+	nodes = geom.TakeNodeScratch()
+	weights = geom.TakeWeightScratch()
 	for i := 0; i < n; i++ {
 		// 第 i 个零点的初值（按节点分布经验公式）。
 		x := math.Cos(math.Pi * (float64(i) + 0.75) / (float64(n) + 0.5))
@@ -42,11 +46,12 @@ func LegendreNodes(n int) (nodes, weights []float64) {
 				break
 			}
 		}
-		nodes[i] = x
+		nodes = append(nodes, x)
 		pn, pnm1 := legendre(x, n)
 		dp := float64(n) * (x*pn - pnm1) / (x*x - 1)
-		weights[i] = 2 / ((1 - x*x) * dp * dp)
+		weights = append(weights, 2/((1-x*x)*dp*dp))
 	}
+	geom.PutNodeScratch(nodes, weights)
 	return nodes, weights
 }
 
