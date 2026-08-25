@@ -25,6 +25,7 @@ func AdaptiveSimpson(f Function, a, b float64, opts ...Option) (Result, error) {
 	if err != nil {
 		return res, err
 	}
+	res = HoldSimpLive(res)
 	return res, nil
 }
 
