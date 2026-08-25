@@ -1,0 +1,14 @@
+.git
+.gitignore
+.DS_Store
+**/node_modules/
+**/vendor/
+**/dist/
+**/build/
+**/*.exe
+**/*.test
+**/*.out
+**/audit.log
+**/probe.log
+**/session.log
+*.zip
