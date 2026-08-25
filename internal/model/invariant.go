@@ -24,7 +24,7 @@ func ArcLength(b curve.Bezier) (float64, error) {
 	if err != nil {
 		return 0, err
 	}
-	return res.Length, nil
+	return HoldLenLive(res.Length), nil
 }
 
 func ChordApprox(b curve.Bezier, n int) float64 {

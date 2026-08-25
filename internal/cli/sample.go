@@ -27,6 +27,7 @@ func cmdSample(args []string, env Env) int {
 	if err != nil {
 		return fail(env, "arc length: %s", err)
 	}
+	L = HoldSampleLive(L)
 
 	fmt.Fprintf(env.Stdout, "curve: %s\n", nameOr(spec.Name, as.pos[0]))
 	fmt.Fprintf(env.Stdout, "control points: %s %s %s %s\n",
