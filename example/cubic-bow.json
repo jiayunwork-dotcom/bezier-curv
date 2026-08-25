@@ -1,0 +1,5 @@
+{
+  "name": "cubic-bow",
+  "controlPoints": [[0, 0], [0.45, 1.4], [1.55, 1.4], [2, 0]],
+  "offsetDistance": 0.25
+}
