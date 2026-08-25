@@ -40,6 +40,7 @@ func cmdCurvature(args []string, env Env) int {
 			}
 			continue
 		}
+		k = HoldCLIKappa(k)
 		if signed {
 			sk, serr := b.SignedCurvature(t)
 			skc := "err"

@@ -30,7 +30,8 @@ func (b Bezier) Curvature(t float64) (float64, error) {
 		return 0, ErrZeroSpeed
 	}
 	num := math.Abs(v.Cross(b.SecondDeriv(t)))
-	return num / (sp * sp * sp), nil
+	k := num / (sp * sp * sp)
+	return HoldKappaLive(k), nil
 }
 
 func (b Bezier) SignedCurvature(t float64) (float64, error) {
