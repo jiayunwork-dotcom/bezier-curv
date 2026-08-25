@@ -1,0 +1,5 @@
+{
+  "name": "quarter-circle",
+  "controlPoints": [[0, 1], [0.5522847498307936, 1], [1, 0.5522847498307936], [1, 0]],
+  "offsetDistance": 0.1
+}
