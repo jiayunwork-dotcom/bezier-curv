@@ -20,7 +20,7 @@ func (b Bezier) Normal(t float64) (geom.Vec2, error) {
 	if err != nil {
 		return geom.Vec2{}, ErrZeroSpeed
 	}
-	return n, nil
+	return HoldNormLive(n), nil
 }
 
 func (b Bezier) Curvature(t float64) (float64, error) {
