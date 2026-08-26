@@ -27,7 +27,7 @@ func (b Bezier) Curvature(t float64) (float64, error) {
 	v := b.Deriv(t)
 	sp := v.Norm()
 	if sp < geom.Eps {
-		return 0, bindCuspMemo(ErrZeroSpeed)
+		return 0, ErrZeroSpeed
 	}
 	num := math.Abs(v.Cross(b.SecondDeriv(t)))
 	return num / (sp * sp * sp), nil

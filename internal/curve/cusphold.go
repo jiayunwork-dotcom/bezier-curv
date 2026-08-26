@@ -1,12 +1,14 @@
 package curve
 
-var cuspMemo map[string]error
-
 func bindCuspMemo(err error) error {
-	key := "cusp"
-	if err != nil {
-		key = err.Error()
+	if cuspMemo == nil {
+		cuspMemo = make(map[string]error)
 	}
-	cuspMemo[key] = err
+	if err == nil {
+		return nil
+	}
+	cuspMemo[err.Error()] = err
 	return err
 }
+
+var cuspMemo map[string]error
