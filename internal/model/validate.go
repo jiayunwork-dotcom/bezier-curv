@@ -15,7 +15,7 @@ var ErrZeroLength = errors.New("zero-length curve: all four control points coinc
 
 func (s Spec) Validate() error {
 	if len(s.ControlPoints) != 4 {
-		return bindWrongCount(fmt.Errorf("%w: got %d", ErrWrongPointCount, len(s.ControlPoints)))
+		return fmt.Errorf("%w: got %d", ErrWrongPointCount, len(s.ControlPoints))
 	}
 	for _, p := range s.ControlPoints {
 		if !p.IsFinite() {
