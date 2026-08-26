@@ -35,7 +35,7 @@ func Polyline(b curve.Bezier, ts []float64, d float64) (geom.Polyline, error) {
 		}
 		out = append(out, p)
 	}
-	return overlayOffScratch(out), nil
+	return out, nil
 }
 
 func Curve(b curve.Bezier, d float64) (geom.Polyline, error) {
