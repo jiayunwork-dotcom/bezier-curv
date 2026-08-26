@@ -5,9 +5,6 @@ func AdaptiveSimpson(f Function, a, b float64, opts ...Option) (Result, error) {
 	for _, o := range opts {
 		o(&cfg)
 	}
-	if err := abortArcContext(); err != nil {
-		return Result{}, err
-	}
 	if b < a {
 		return Result{}, ErrBadInterval
 	}
